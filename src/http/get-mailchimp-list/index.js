@@ -10,7 +10,7 @@ exports.handler = async function http (req) {
 
     const response = await mailchimp.lists.getAllLists()
     var picked = response.lists.find(o => o.name === decodeURI(name));
-    console.log(`list_id: ${picked.id}`)
+    console.log(`${picked}`)
 
     return {
         statusCode: 200,
