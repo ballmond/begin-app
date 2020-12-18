@@ -1,7 +1,7 @@
-import mailchimp from "@mailchimp/mailchimp_marketing";
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
-  apiKey: "34d92ccdef910010d471b201e58c849b-us7",
+  apiKey: process.env.MAILCHIMP_KEY,
   server: "us7",
 });
 
