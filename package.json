@@ -12,5 +12,8 @@
     "tap-spec": "^5.0.0",
     "tape": "^5.0.1",
     "tiny-json-http": "^7.2.0"
+  },
+  "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.25"
   }
 }
