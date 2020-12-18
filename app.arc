@@ -1,5 +1,5 @@
 @app
-fcc-apis
+corsapp
 
 @static
 
