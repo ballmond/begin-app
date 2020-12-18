@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Begin basic Hello World! app for Node",
   "scripts": {
-    "start": "cross-env NODE_ENV=testing npx sandbox",
+    "start": "cross-env NODE_ENV=testing npx sandbox --port 3332",
     "test": "QUIET=1 tape test/*-test.js | tap-spec"
   },
   "devDependencies": {
