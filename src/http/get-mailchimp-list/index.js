@@ -18,4 +18,5 @@ exports.handler = async function http (req) {
         },
         body: JSON.stringify(picked)
       }
+  
   }
