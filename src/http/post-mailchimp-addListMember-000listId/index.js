@@ -21,8 +21,10 @@ exports.handler = async function http(req) {
 
   return {
     statusCode: 201,
-    cors: true,
-    headers: {"Content-type": "application/json; charset=UTF-8"},
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-type": "application/json; charset=UTF-8"
+    },
     body: JSON.stringify({
       listId: `${listId}`,
       fname: `${fname}`,
