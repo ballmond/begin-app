@@ -1,6 +1,8 @@
 let arc = require('@architect/functions')
 
 exports.handler = async function http(req) {
+  console.log(req.body["first"])
+  
   let {first, last} = arc.http.helpers.bodyParser(req)
   return {
     statusCode: 200,

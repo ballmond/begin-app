@@ -10,11 +10,9 @@ exports.handler = async function http (req) {
 
     const response = await mailchimp.lists.getAllLists()
     var picked = response.lists.find(o => o.name === decodeURI(name));
-    console.log(`${picked}`)
 
     return {
         statusCode: 200,
-        cors: true,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "content-type": "application/json; charset=utf-8"

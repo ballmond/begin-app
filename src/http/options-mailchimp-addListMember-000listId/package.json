@@ -1,12 +1,9 @@
 {
-  "name": "get-mailchimp-addListMember-000listId",
+  "name": "options-mailchimp-addListMember-000listId",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "@architect/functions": "^3.13.8",
-    "@mailchimp/mailchimp_marketing": "^3.0.25"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
