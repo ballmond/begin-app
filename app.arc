@@ -13,4 +13,4 @@ get /mailchimp
 get /mailchimp/list
 post /name
 post /mailchimp/addListMember/:listId
-options /mailchimp/addListMember/:listId
+options /mailchimp/addListMember
