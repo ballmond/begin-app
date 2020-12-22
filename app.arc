@@ -5,6 +5,7 @@ corsapp
 
 @http
 get /
+options /
 get /json
 get /now
 get /echo/:word
@@ -13,4 +14,3 @@ get /mailchimp
 get /mailchimp/list
 post /name
 post /mailchimp/addListMember/:listId
-options /mailchimp/addListMember
