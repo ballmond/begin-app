@@ -19,6 +19,7 @@ async function addMember(listId, email, fname, lname) {
 exports.handler = async function http(req) {
   let { listId } = req.pathParameters
   let {email, fname, lname} = arc.http.helpers.bodyParser(req)
+  console.log(req)
 
   const response = await addMember(listId, email, fname, lname)
     .catch(err => {
@@ -28,6 +29,7 @@ exports.handler = async function http(req) {
         cors: true,
         headers: {
         'access-control-allow-origin': '*',
+        "access-control-allow-headers": ["Content-Type"],
         "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({
@@ -40,10 +42,12 @@ exports.handler = async function http(req) {
       cors: true,
       headers: {
       'access-control-allow-origin': '*',
+      "access-control-allow-headers": ["Content-Type"],
       "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
         listId: `${listId}`,
+        email: `${email}`,
         fname: `${fname}`,
         lname: `${lname}`,
         response: response
