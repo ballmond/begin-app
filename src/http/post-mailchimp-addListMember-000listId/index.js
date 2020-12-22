@@ -13,7 +13,7 @@ async function addMember(listId, email, fname, lname) {
     merge_fields: {
       FNAME: fname,
       LNAME: lname
-  }});
+  }})
 }
 
 exports.handler = async function http(req) {
@@ -21,6 +21,20 @@ exports.handler = async function http(req) {
   let {email, fname, lname} = arc.http.helpers.bodyParser(req)
 
   const response = await addMember(listId, email, fname, lname)
+    .catch(err => {
+      console.log(err.response.error)
+      return {
+        statusCode: err.response.error.status,
+        cors: true,
+        headers: {
+        'access-control-allow-origin': '*',
+        "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+          response: err.response.error
+        })  
+      }
+    })
   return {
       statusCode: 201,
       cors: true,
@@ -32,7 +46,7 @@ exports.handler = async function http(req) {
         listId: `${listId}`,
         fname: `${fname}`,
         lname: `${lname}`,
-        id: response.id
+        response: response
       })
     }
 }
