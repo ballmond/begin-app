@@ -13,6 +13,7 @@ exports.handler = async function http (req) {
 
     return {
         statusCode: 200,
+        cors=true,
         headers: {
           "content-type": "application/json; charset=utf-8"
         },
