@@ -6,13 +6,20 @@ mailchimp.setConfig({
 });
 
 async function addMember(listId, email, fname, lname) {
-  return await mailchimp.lists.addListMember(listId, {
-    email_address: email,
-    status: "subscribed",
-    merge_fields: {
-      FNAME: fname,
-      LNAME: lname
-  }})
+  let response 
+  try {
+    response = await mailchimp.lists.addListMember(listId, {
+      email_address: email,
+      status: "subscribed",
+      merge_fields: {
+        FNAME: fname,
+        LNAME: lname
+    }})      
+  } catch (error) {
+    return error
+  }
+
+  return response
 }
 
 exports.handler = async function http(req) {
@@ -38,8 +45,9 @@ exports.handler = async function http(req) {
         })
     }  
   }
+
   return {
-    statusCode: 201,
+    statusCode: response.status === 'subscribed' ? 201 : response.status,
     cors: true,
     headers: {
       'access-control-allow-origin': '*',
