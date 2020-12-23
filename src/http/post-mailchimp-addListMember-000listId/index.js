@@ -29,6 +29,7 @@ exports.handler = async function http(req) {
 
   try {
     response = await addMember(listId, email, fname, lname)    
+    console.log(`after addMember`)
   } catch (error) {
     return {
       statusCode: 400,
@@ -46,6 +47,7 @@ exports.handler = async function http(req) {
     }  
   }
 
+  console.log("returning")
   return {
     statusCode: response.status === 'subscribed' ? 201 : response.status,
     cors: true,
