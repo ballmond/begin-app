@@ -17,84 +17,41 @@ async function addMember(listId, email, fname, lname) {
 
 exports.handler = async function http(req) {
   let { listId } = req.pathParameters
-  let err = false
   let {email, fname, lname} = req.queryStringParameters
-  // let {email, fname, lname} = arc.http.helpers.bodyParser(req)
+  let response
 
-  const response = await addMember(listId, email, fname, lname)
-    .then(response => {
-      return {
-        statusCode: 201,
-        cors: true,
-        headers: {
-          'access-control-allow-origin': '*',
-          "access-control-allow-headers": ["Content-Type"],
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({
-          listId: `${listId}`,
-          email: `${email}`,
-          fname: `${fname}`,
-          lname: `${lname}`,
-          response: response
-        })
-      }
-    })
-    .catch(error => {
-      console.log(error)
-      return {
-        statusCode: 400,
-        cors: true,
-        headers: {
-          'access-control-allow-origin': '*',
-          "access-control-allow-headers": ["Content-Type"],
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({
-          error: {
-            status: error.response.error.status,
-            text: JSON.parse(error.response.error.text)}
-          })
-      }
-    })
-
-    // return response
+  try {
+    response = await addMember(listId, email, fname, lname)    
+  } catch (error) {
     return {
-      statusCode: 200,
-      body: JSON.stringify({status: "ok"})
-    }
-
-    // if (err) {
-    //   return {
-    //     statusCode: 400,
-    //     cors: true,
-    //     headers: {
-    //       'access-control-allow-origin': '*',
-    //       "access-control-allow-headers": ["Content-Type"],
-    //       "Content-type": "application/json; charset=UTF-8"
-    //     },
-    //     body: JSON.stringify({
-    //       error: {
-    //         status: response.response.error.status,
-    //         text: JSON.parse(response.response.error.text)}
-    //       })
-    //   }
-    // }else{
-    //   return {
-    //     statusCode: 201,
-    //     cors: true,
-    //     headers: {
-    //       'access-control-allow-origin': '*',
-    //       "access-control-allow-headers": ["Content-Type"],
-    //       "Content-type": "application/json; charset=UTF-8"
-    //     },
-    //     body: JSON.stringify({
-    //       listId: `${listId}`,
-    //       email: `${email}`,
-    //       fname: `${fname}`,
-    //       lname: `${lname}`,
-    //       response: response
-    //     })
-    //   }
-    // }
+      statusCode: 400,
+      cors: true,
+      headers: {
+        'access-control-allow-origin': '*',
+        "access-control-allow-headers": ["Content-Type"],
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({
+        error: {
+          status: error.response.error.status,
+          text: JSON.parse(error.response.error.text)}
+        })
+    }  
+  }
+  return {
+    statusCode: 201,
+    cors: true,
+    headers: {
+      'access-control-allow-origin': '*',
+      "access-control-allow-headers": ["Content-Type"],
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      listId: `${listId}`,
+      email: `${email}`,
+      fname: `${fname}`,
+      lname: `${lname}`,
+      response: response
+    })
+  }
 }
