@@ -18,29 +18,11 @@ exports.handler = async function http(req) {
         FNAME: fname,
         LNAME: lname
     }})
-    // response = await addMember(listId, email, fname, lname)    
-    // return {
-    //   statusCode: response.status === 'subscribed' ? 201 : response.status,
-    //   cors: true,
-    //   headers: {
-    //     'access-control-allow-origin': '*',
-    //     "access-control-allow-headers": ["Content-Type"],
-    //     "Content-type": "application/json; charset=UTF-8"
-    //   },
-    //   body: JSON.stringify({
-    //     listId: `${listId}`,
-    //     email: `${email}`,
-    //     fname: `${fname}`,
-    //     lname: `${lname}`,
-    //     response: response
-    //   })
-    // }  
     return {
       statusCode: 200,
       cors: true,
       headers: {
         'access-control-allow-origin': '*',
-        "access-control-allow-headers": ["Content-Type"],
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
