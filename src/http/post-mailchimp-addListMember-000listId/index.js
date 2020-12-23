@@ -58,6 +58,7 @@ exports.handler = async function http(req) {
         email: `${email}`,
         fname: `${fname}`,
         lname: `${lname}`,
+        response: response
       })
     }
   } catch (error) {
