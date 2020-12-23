@@ -19,7 +19,7 @@ exports.handler = async function http(req) {
         LNAME: lname
     }})
     return {
-      statusCode: 200,
+      statusCode: response.status === 'subscribed' ? 201 : response.error.status,
       cors: true,
       headers: {
         'access-control-allow-origin': '*',
