@@ -58,7 +58,11 @@ exports.handler = async function http(req) {
       }
     })
 
-    return response
+    // return response
+    return {
+      statusCode: 200,
+      body: JSON.stringify({status: "ok"})
+    }
 
     // if (err) {
     //   return {
