@@ -56,6 +56,8 @@ exports.handler = async function http(req) {
       body: JSON.stringify({
         listId: `${listId}`,
         email: `${email}`,
+        fname: `${fname}`,
+        lname: `${lname}`,
       })
     }
   } catch (error) {
