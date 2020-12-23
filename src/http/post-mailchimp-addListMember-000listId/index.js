@@ -5,22 +5,6 @@ mailchimp.setConfig({
   server: "us7",
 });
 
-// async function addMember(listId, email, fname, lname) {
-//   let response 
-//   try {
-//     response = await mailchimp.lists.addListMember(listId, {
-//       email_address: email,
-//       status: "subscribed",
-//       merge_fields: {
-//         FNAME: fname,
-//         LNAME: lname
-//     }})
-//     return response
-//   } catch (error) {
-//     return error
-//   }
-// }
-
 exports.handler = async function http(req) {
   let { listId } = req.pathParameters
   let {email, fname, lname} = req.queryStringParameters
@@ -56,6 +40,7 @@ exports.handler = async function http(req) {
       cors: true,
       headers: {
         'access-control-allow-origin': '*',
+        "access-control-allow-headers": ["Content-Type"],
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
