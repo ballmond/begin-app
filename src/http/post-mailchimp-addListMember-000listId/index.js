@@ -29,7 +29,22 @@ exports.handler = async function http(req) {
 
   try {
     response = await addMember(listId, email, fname, lname)    
-    console.log(`after addMember`)
+    return {
+      statusCode: response.status === 'subscribed' ? 201 : response.status,
+      cors: true,
+      headers: {
+        'access-control-allow-origin': '*',
+        "access-control-allow-headers": ["Content-Type"],
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({
+        listId: `${listId}`,
+        email: `${email}`,
+        fname: `${fname}`,
+        lname: `${lname}`,
+        response: response
+      })
+    }  
   } catch (error) {
     return {
       statusCode: 400,
@@ -45,23 +60,5 @@ exports.handler = async function http(req) {
           text: JSON.parse(error.response.error.text)}
         })
     }  
-  }
-
-  console.log("returning")
-  return {
-    statusCode: response.status === 'subscribed' ? 201 : response.status,
-    cors: true,
-    headers: {
-      'access-control-allow-origin': '*',
-      "access-control-allow-headers": ["Content-Type"],
-      "Content-type": "application/json; charset=UTF-8"
-    },
-    body: JSON.stringify({
-      listId: `${listId}`,
-      email: `${email}`,
-      fname: `${fname}`,
-      lname: `${lname}`,
-      response: response
-    })
   }
 }
