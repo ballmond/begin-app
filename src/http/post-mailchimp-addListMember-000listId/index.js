@@ -46,6 +46,22 @@ exports.handler = async function http(req) {
       }
     }else{
       console.log(response)
+      console.log({
+        statusCode: 201,
+        cors: true,
+        headers: {
+          'access-control-allow-origin': '*',
+          "access-control-allow-headers": ["Content-Type"],
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+          listId: `${listId}`,
+          email: `${email}`,
+          fname: `${fname}`,
+          lname: `${lname}`,
+          response: response
+        })
+      })
       return {
         statusCode: 201,
         cors: true,
