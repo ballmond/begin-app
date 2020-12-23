@@ -14,12 +14,11 @@ async function addMember(listId, email, fname, lname) {
       merge_fields: {
         FNAME: fname,
         LNAME: lname
-    }})      
+    }})
+    return response
   } catch (error) {
     return error
   }
-
-  return response
 }
 
 exports.handler = async function http(req) {
