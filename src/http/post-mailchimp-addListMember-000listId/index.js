@@ -53,6 +53,7 @@ exports.handler = async function http(req) {
     // }  
     return {
       statusCode: 200,
+      cors: true,
       body: JSON.stringify({
         listId: `${listId}`,
         email: `${email}`,
