@@ -18,39 +18,47 @@ async function addMember(listId, email, fname, lname) {
 
 exports.handler = async function http(req) {
   let { listId } = req.pathParameters
-  let {email, fname, lname} = arc.http.helpers.bodyParser(req)
-  console.log(req)
+  let err = false
+  let {email, fname, lname} = req.queryStringParameters
+  // let {email, fname, lname} = arc.http.helpers.bodyParser(req)
 
   const response = await addMember(listId, email, fname, lname)
-    .catch(err => {
-      console.log(err.response.error)
+    .catch(error => {
+      err = true
+      return error
+    })
+
+    if (err) {
       return {
-        statusCode: err.response.error.status,
+        statusCode: 400,
         cors: true,
         headers: {
-        'access-control-allow-origin': '*',
-        "access-control-allow-headers": ["Content-Type"],
-        "Content-type": "application/json; charset=UTF-8"
+          'access-control-allow-origin': '*',
+          "access-control-allow-headers": ["Content-Type"],
+          "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({
-          response: err.response.error
-        })  
+          error: {
+            status: response.response.error.status,
+            text: JSON.parse(response.response.error.text)}
+          })
       }
-    })
-  return {
-      statusCode: 201,
-      cors: true,
-      headers: {
-      'access-control-allow-origin': '*',
-      "access-control-allow-headers": ["Content-Type"],
-      "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify({
-        listId: `${listId}`,
-        email: `${email}`,
-        fname: `${fname}`,
-        lname: `${lname}`,
-        response: response
-      })
+    }else{
+      return {
+        statusCode: 201,
+        cors: true,
+        headers: {
+          'access-control-allow-origin': '*',
+          "access-control-allow-headers": ["Content-Type"],
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+          listId: `${listId}`,
+          email: `${email}`,
+          fname: `${fname}`,
+          lname: `${lname}`,
+          response: response
+        })
+      }  
     }
 }
