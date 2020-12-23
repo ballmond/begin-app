@@ -36,6 +36,11 @@ exports.handler = async function http(req) {
   } catch (error) {
     return {
       statusCode: 400,
+      cors: true,
+      headers: {
+        'access-control-allow-origin': '*',
+        "Content-type": "application/json; charset=UTF-8"
+      },
       body: JSON.stringify({
         error: {
           status: error.response.error.status,
