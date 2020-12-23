@@ -25,6 +25,7 @@ exports.handler = async function http(req) {
   const response = await addMember(listId, email, fname, lname)
     .catch(error => {
       err = true
+      console.log(err)
       return error
     })
 
@@ -44,6 +45,7 @@ exports.handler = async function http(req) {
           })
       }
     }else{
+      console.log(response)
       return {
         statusCode: 201,
         cors: true,
