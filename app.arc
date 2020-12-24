@@ -14,3 +14,4 @@ get /mailchimp/list
 get /validate/email/:email
 post /name
 post /mailchimp/addListMember/:listId
+post /validate/recaptcha
